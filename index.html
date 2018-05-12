@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.js"></script>
+    <script src="./scripts/zepto.dialog.js"></script>
+    <link rel="stylesheet" href="./css/dialog.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            padding: 20px;
+            font-size: 12px;
+        }
+
+        .dw-btn {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            padding: 10px 32px;
+            display: inline-block;
+            vertical-align: middle;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            border-radius: 4px;
+            background: #eee;
+            color: #ffffff;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            border-radius: 4px;
+            overflow-wrap: break-word;
+            margin: 10px;
+        }
+        .dw-btn.disabled {
+            background: #aaaaaa;
+            color: #fff;
+            border: none;
+        }
+        .dw-btn.sucess {
+            background: #21B384;
+            color: #fff;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="g-dialog-contianer">
+        <div class="dialog-window">
+            <div class="dialog-header"></div>
+            <div class="dialog-content">你是否确定清空购物车？</div>
+            <div class="dialog-footer">
+                <button class="green">按钮1</button>
+                <button class="red">按钮2</button>
+                <button>按钮3</button>
+            </div>
+        </div>
+    </div> -->
+
+    <button id="btn1" class="dw-btn disabled">没有传递任何参数</button>
+    <button id="btn2" class="dw-btn disabled">弹出一个不带任何按钮，且是警告的框，并且2秒后自动关闭</button>
+    <button id="btn3" class="dw-btn disabled">弹出一个有确认和取消按钮的成功框，点击按钮关闭和不关闭</button>
+    <button id="btn4" class="dw-btn disabled">弹出一个有确认按钮的警告框，点击按钮不关闭（需手动关闭）</button>
+    <button id="btn5" class="dw-btn disabled">弹出一个多组合的按钮框，且按钮样式可定制</button>
+    <button id="btn6" class="dw-btn disabled">弹出一个确认和删除的框，点击确认弹出加载框2秒自动关闭，点击删除按钮把上一次框关闭</button>
+    <button id="btn7" class="dw-btn disabled">开启动画效果</button>
+    <button id="btn8" class="dw-btn disabled">延时关闭加回调函数</button>
+    <button id="btn9" class="dw-btn disabled">点击遮罩层是否可以关闭</button>
+</body>
+<script type="text/javascript">
+    $('#btn1').on('click', function () {
+        // var d = new dialog() // 调用方式1
+        var d = dialog() // 调用方式2
+    })
+    $('#btn2').on('click', function () {
+        var d = dialog({
+            type: 'ok',
+            message: '2秒后关闭',
+            delay: 2000
+        })
+    })
+    $('#btn3').on('click', function () {
+        var d = dialog({
+            type: 'waiting',
+            message: '你还好吗？',
+            buttons:[
+                {
+                    type: 'red',
+                    text: '确定',
+                    callback: function(){
+                        alert('点了确定不关闭')
+                        return false
+                    }
+                },
+                {
+                    type: 'green',
+                    text: '取消',
+                    callback: function(){
+                        alert('点了取消关闭')
+                    }
+                }
+            ],
+            maskOpacity: 0.5
+        })
+        
+    })
+    $('#btn4').on('click', function () {
+        var d = dialog({
+            type: 'warning',
+            buttons: [
+                {
+                    type: 'red',
+                    text: '确定',
+                    callback: function () {
+                        return false; // 返回值为false不关闭弹窗
+                    }
+                },
+            ],
+        })
+    })
+    $('#btn5').on('click', function () {
+        var d = dialog({
+            type: '',
+            buttons: [
+                {
+                    text: '默认',
+                    callback: function () {
+                        return false;
+                    },
+                },
+                {
+                    type: 'red',
+                    text: '确认',
+                },
+                {
+                    type: 'green',
+                    text: '取消',
+                },
+            ]
+        });
+    });
+    $('#btn6').on('click', function () {
+        var d6 = dialog({
+            type: 'ok',
+            buttons: [
+                {
+                    type: 'red',
+                    text: '确认',
+                    callback: function () {
+                        dialog({
+                            type: 'waiting',
+                            delay: 2000,
+                        })
+                        return false;
+                    },
+                },
+                {
+                    type: 'green',
+                    text: '删除',
+                    callback: function () {
+                        // 用暴露出来的close将实例对象关闭
+                        d6.close();
+                    },
+                },
+            ]
+        });
+    });
+    $('#btn7').on('click', function () {
+        var d = dialog({
+            type: '',
+            buttons: [
+                {
+                    text: '默认',
+                    callback: function () {
+                        return false;
+                    },
+                },
+                {
+                    type: 'red',
+                    text: '确认',
+                },
+                {
+                    type: 'green',
+                    text: '取消',
+                },
+            ],
+            effect: true, // 开启动画
+            maskOpacity: 0.5
+        });
+    });
+
+    $('#btn8').on('click', function () {
+        var d = dialog({
+            type: 'ok',
+            message: '2秒后关闭加回调函数',
+            delay: 2000,
+            delayCallBack: function(){
+                alert('延时关闭后执行的事件')
+            }
+        })
+    })
+
+    $('#btn9').on('click', function () {
+        var d = dialog({
+            type: 'ok',
+            maskClose: true,
+            buttons: [
+                {
+                    type: 'red',
+                    text: '确认',
+                    callback: function() {
+                        return false
+                    }
+                },
+                {
+                    type: 'green',
+                    text: '取消',
+                },
+            ]
+        });
+    });
+
+</script>
+
+</html>

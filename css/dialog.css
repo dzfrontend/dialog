@@ -1,0 +1,63 @@
+.g-dialog-contianer{position: fixed;top:0;left:0;background: rgba(0,0,0,0.6);height: 100%;width: 100%;display:-webkit-flex;-webkit-align-items:center;-webkit-justify-content:center;}
+.g-dialog-contianer .dialog-window{padding:10px;background: rgba(0,0,0,0.8);border-radius: 10px;-webkit-transition:all .2s cubic-bezier(0.32, -0.01, 0.56, 1.3);}
+.g-dialog-contianer .dialog-header{width: 50px;height: 50px;margin:0 auto;}
+/* css3实现ok icon */
+.g-dialog-contianer .dialog-header.ok,
+.g-dialog-contianer .dialog-header.warning,
+.g-dialog-contianer .dialog-header.waiting{
+    border: 2px solid #fff;border-radius: 50%;
+    display: -webkit-flex; justify-content: center;align-items: center;
+}
+.g-dialog-contianer .dialog-header.ok::after{
+    content: '';display: block;width: 30px;height: 15px;border: 2px solid #fff;
+    border-width: 0 0 2px 2px;transform: rotate(-50deg);-webkit-transform: rotate(-50deg);margin-bottom: 10px;
+}
+.g-dialog-contianer .dialog-header.warning{
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+}
+.g-dialog-contianer .dialog-header.warning::before{
+    content: '';display: block;width: 20px;height: 4px;background-color: #fff;
+}
+.g-dialog-contianer .dialog-header.warning::after{
+    content: '';display: block;width: 4px;height: 4px;background-color: #fff;margin-left: 5px;
+}
+.g-dialog-contianer .dialog-header.loading{background: url(../images/loading.gif) no-repeat center;background-size: 100%;}
+@-webkit-keyframes waiting-1{
+    0%{
+        -webkit-transform: translate(-5px,0)
+    }
+    50%{
+        -webkit-transform: translate(10px,0)
+    }
+    100%{
+        -webkit-transform: translate(-5px,0)
+    }
+}
+@-webkit-keyframes waiting-2{
+    0%{
+        -webkit-transform: translate(5px,0)
+    }
+    50%{
+        -webkit-transform: translate(-10px,0)
+    }
+    100%{
+        -webkit-transform: translate(5px,0)
+    }
+}
+.g-dialog-contianer .dialog-header.waiting::before{
+    content: '';display: block;width: 10px;height: 10px;
+    background-color: yellow;border-radius: 50%;
+    -webkit-animation: waiting-1 0.5s infinite;
+}
+
+.g-dialog-contianer .dialog-header.waiting::after{
+    content: '';display: block;width: 10px;height: 10px;
+    background-color: red;border-radius: 50%;
+    -webkit-animation: waiting-2 0.5s infinite;
+}
+.g-dialog-contianer .dialog-content{padding:10px 10px 0px;color: #fff;line-height: 180%;text-align: center;font-size: 14px;}
+.g-dialog-contianer .dialog-footer{padding:10px 10px 0px;display: -webkit-flex;-webkit-justify-content:center;-webkit-align-items:center;}
+.g-dialog-contianer .dialog-footer button{display:inline-block;width:auto;-webkit-appearance: normal;background: rgba(255,255,255,0.8);padding:0.8em 1.8em;border:none;color:#eee;border-radius: 5px;margin:0.3em;text-shadow:#666 1px 1px 0;}
+.g-dialog-contianer .dialog-footer button.green{background: rgba(2,202,200,0.8);}
+.g-dialog-contianer .dialog-footer button.red{background: rgba(251,23,50,0.8);}
