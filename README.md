@@ -27,14 +27,14 @@
 	<script src="../scripts/zepto.dialog.js"></script>
 
 	var d = dialog({
-		type: 'waiting', // 对话框类型 必选 可以为loading message waiting warning ok
+        type: 'waiting', // 对话框类型 必选 可以为loading message waiting warning ok
         message: null, // 对话框提示信息
         buttons: null, // 按钮配置(确定,取消,无等)
         delay: null, // 对话框延时多少秒自动关闭(null不关闭)
         delayCallBack: null, // 延时关闭回调
         maskOpacity: null, // 遮罩透明度(null不设置透明度，为默认透明度)
         maskClose: false, // 点击mask是否关闭
-		effect: false, // 是否开启动画
+        effect: false, // 是否开启动画
         width: 'auto', // 宽
         height: 'auto' // 高
 	})
