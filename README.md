@@ -8,7 +8,7 @@
 
 ## Examples
 
-[:point_right: 在线demo查看效果 ](https://github.com/zhansingsong/react-lazyimg-component.git)
+[:point_right: 在线demo查看效果 ](https://dzfrontend.github.io/dialog-jq/examples/index.html)
 
 ## 效果截图
 
@@ -20,6 +20,8 @@
 <img src="shotcut/4.png"/>
 
 ## api
+
+```javascript
 
 	<script src="../scripts/zepto.js"></script>
 	<script src="../scripts/zepto.dialog.js"></script>
@@ -37,6 +39,7 @@
         height: 'auto' // 高
 	})
 
+```
 
 
 
